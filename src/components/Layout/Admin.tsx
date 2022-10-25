@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 
 export interface AdminLayoutProps {}
 
 export function AdminLayout(props: AdminLayoutProps) {
-  return <div>AdminLayout</div>;
+  return <div>Admin Layout</div>;
 }

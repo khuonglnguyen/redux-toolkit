@@ -44,12 +44,9 @@ export const counterSlice = createSlice({
     },
 
     incrementSaga: (state, action: PayloadAction<number>) => {
-      // state.value += action.payload;
       state.status = 'loading';
     },
-
     incrementSagaSuccess: (state, action: PayloadAction<number>) => {
-      // state.value += action.payload;
       state.status = 'idle';
       state.value += action.payload;
     },
@@ -64,9 +61,6 @@ export const counterSlice = createSlice({
       .addCase(incrementAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.value += action.payload;
-      })
-      .addCase(incrementAsync.rejected, (state) => {
-        state.status = 'failed';
       });
   },
 });

@@ -5,6 +5,7 @@ export interface Student {
   mark: number;
   gender: 'male' | 'female';
   city: string;
-  createAt?: number;
+
+  createdAt?: number;
   updatedAt?: number;
 }

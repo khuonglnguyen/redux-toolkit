@@ -1,30 +1,29 @@
-import React, { useEffect } from 'react';
 import cityApi from 'api/cityApi';
-import { Routes, Route } from 'react-router-dom';
-import LoginPage from 'features/auth/pages/LoginPage';
-import { AdminLayout } from 'components/Layout';
 import { NotFound, PrivateRoute } from 'components/Common';
+import { AdminLayout } from 'components/Layout';
+import LoginPage from 'features/auth/pages/LoginPage';
+import React, { useEffect } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
   useEffect(() => {
-    cityApi.getAll().then((res) => {
-      console.log(res);
-    });
-  }, []);
+    cityApi.getAll().then((response) => console.log(response));
+  });
 
   return (
-    <Routes>
-      <Route path="/login" element={<LoginPage></LoginPage>}></Route>
-      <Route
-        path="/admin"
-        element={
-          <PrivateRoute>
-            <AdminLayout></AdminLayout>
-          </PrivateRoute>
-        }
-      ></Route>
-      <Route path="*" element={<NotFound></NotFound>}></Route>
-    </Routes>
+    <Switch>
+      <Route path="/login">
+        <LoginPage />
+      </Route>
+
+      <PrivateRoute path="/admin">
+        <AdminLayout />
+      </PrivateRoute>
+
+      <Route>
+        <NotFound />
+      </Route>
+    </Switch>
   );
 }
 
