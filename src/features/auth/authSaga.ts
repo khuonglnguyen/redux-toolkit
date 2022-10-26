@@ -1,10 +1,11 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { push } from 'connected-react-router';
-import { call, fork, put, take } from 'redux-saga/effects';
+import { call, delay, fork, put, take } from 'redux-saga/effects';
 import { authActions, LoginPaylod } from './authSlice';
 
 function* handleLogin(payload: LoginPaylod) {
   try {
+    yield delay(1000);
     localStorage.setItem('access_token', 'afs');
     yield put(
       authActions.loginSuccess({

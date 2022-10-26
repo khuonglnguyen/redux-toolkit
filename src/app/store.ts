@@ -9,7 +9,7 @@ import { history } from 'utils';
 const rootReducer = combineReducers({
   router: connectRouter(history),
   counter: counterReducer,
-  authe: authReducer,
+  auth: authReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();
