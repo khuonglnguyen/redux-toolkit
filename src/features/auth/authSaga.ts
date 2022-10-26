@@ -17,7 +17,7 @@ function* handleLogin(payload: LoginPaylod) {
     yield put(authActions.loginFailed(error.message));
   }
   // redirect to admin page
-  yield put(push('/admin'));
+  yield put(push('/admin/dashboard'));
 }
 function* handleLogout() {
   localStorage.removeItem('access_token');
