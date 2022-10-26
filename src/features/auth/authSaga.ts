@@ -1,20 +1,35 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { fork, take } from 'redux-saga/effects';
+import { call, fork, put, take } from 'redux-saga/effects';
 import { authActions, LoginPaylod } from './authSlice';
 
 function* handleLogin(payload: LoginPaylod) {
-  console.log('Handle login', payload);
+  try {
+    localStorage.setItem('access_token', 'afs');
+    yield put(
+      authActions.loginSuccess({
+        id: 1,
+        name: 'Victor Nguyen',
+      })
+    );
+  } catch (error: any) {
+    yield put(authActions.loginFailed(error.message));
+  }
+  // redirect to admin page
 }
 function* handleLogout() {
-  console.log('Handle logout');
+  localStorage.removeItem('access_token');
+  // redirect to login page
 }
 function* watchLoginFlow() {
   while (true) {
-    const action: PayloadAction<LoginPaylod> = yield take(authActions.login.type);
-    yield fork(handleLogin, action.payload);
+    const isLoggedIn = Boolean(localStorage.getItem('access_token'));
+    if (!isLoggedIn) {
+      const action: PayloadAction<LoginPaylod> = yield take(authActions.login.type);
+      yield fork(handleLogin, action.payload);
+    }
 
     yield take(authActions.logout.type);
-    yield fork(handleLogout);
+    yield call(handleLogout);
   }
 }
 
