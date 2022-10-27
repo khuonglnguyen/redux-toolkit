@@ -42,8 +42,12 @@ const dashboardSlice = createSlice({
     fetchData(state) {
       state.loading = true;
     },
-    fetchDataSuccess(state) {},
-    fetchDataFailed(state) {},
+    fetchDataSuccess(state) {
+      state.loading = false;
+    },
+    fetchDataFailed(state) {
+      state.loading = false;
+    },
 
     setStatistics(state, action: PayloadAction<DashboardStatistics>) {
       state.statistics = action.payload;
@@ -64,11 +68,11 @@ const dashboardSlice = createSlice({
 export const dashboardActions = dashboardSlice.actions;
 
 // Selectors
-export const selectorStatistics = (state: RootState) => state.dashboard.statistics;
-export const selectorLoading = (state: RootState) => state.dashboard.loading;
-export const selectorHighestStudentList = (state: RootState) => state.dashboard.highestStudentList;
-export const selectorLowestStudentList = (state: RootState) => state.dashboard.lowestStudentList;
-export const selectorRankingByCityList = (state: RootState) => state.dashboard.rankingByCityList;
+export const selectStatistics = (state: RootState) => state.dashboard.statistics;
+export const selectLoading = (state: RootState) => state.dashboard.loading;
+export const selectHighestStudentList = (state: RootState) => state.dashboard.highestStudentList;
+export const selectLowestStudentList = (state: RootState) => state.dashboard.lowestStudentList;
+export const selectRankingByCityList = (state: RootState) => state.dashboard.rankingByCityList;
 
 // Reducers
 const dashboardReducer = dashboardSlice.reducer;
