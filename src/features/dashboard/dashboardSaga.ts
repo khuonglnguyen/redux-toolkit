@@ -57,8 +57,6 @@ function* fetchLowsetStudentList() {
   yield put(dashboardActions.setLowestStudentList(data));
 }
 
-function* fetchLowestStudentList() {}
-
 function* fetchRankingByCityList() {
   // Fetch city list
   const { data: cityList }: ListResponse<City> = yield call(cityApi.getAll);

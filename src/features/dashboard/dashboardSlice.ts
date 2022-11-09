@@ -68,12 +68,12 @@ const dashboardSlice = createSlice({
 export const dashboardActions = dashboardSlice.actions;
 
 // Selectors
-export const selectStatistics = (state: RootState) => state.dashboard.statistics;
-export const selectLoading = (state: RootState) => state.dashboard.loading;
+export const selectDashboardLoading = (state: RootState) => state.dashboard.loading;
+export const selectDashboardStatistics = (state: RootState) => state.dashboard.statistics;
 export const selectHighestStudentList = (state: RootState) => state.dashboard.highestStudentList;
 export const selectLowestStudentList = (state: RootState) => state.dashboard.lowestStudentList;
 export const selectRankingByCityList = (state: RootState) => state.dashboard.rankingByCityList;
 
-// Reducers
+// Reducer
 const dashboardReducer = dashboardSlice.reducer;
 export default dashboardReducer;
