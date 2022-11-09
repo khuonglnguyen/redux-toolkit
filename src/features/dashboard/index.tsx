@@ -1,8 +1,10 @@
-import { Box, Grid, LinearProgress, makeStyles } from '@material-ui/core';
-import { ChatBubble, ChatRounded, LinearScaleSharp, PeopleAlt } from '@material-ui/icons';
+import { Box, Grid, LinearProgress, makeStyles, Typography } from '@material-ui/core';
+import { ChatBubble, ChatRounded, LinearScaleSharp, PeopleAlt, Widgets } from '@material-ui/icons';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import React, { useEffect } from 'react';
 import StatisticItem from './components/StatisticItem';
+import StudentRakingList from './components/StudentRakingList';
+import Widget from './components/Widget';
 import {
   dashboardActions,
   selectDashboardLoading,
@@ -86,6 +88,35 @@ export default function Dashboard() {
           />
         </Grid>
       </Grid>
+
+      {/* All students raking*/}
+      <Box mt={4}>
+        <Typography variant="h4">All Students</Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6} lg={3}>
+            <Widget title="Student with highest mark">
+              <StudentRakingList studentList={highestStudentList} />
+            </Widget>
+          </Grid>
+          <Grid item xs={12} md={6} lg={3}>
+            <Widget title="Student with highest mark">
+              <StudentRakingList studentList={lowestStudentList} />
+            </Widget>
+          </Grid>
+        </Grid>
+      </Box>
+      <Box mt={4}>
+        <Typography variant="h4">Raking by City</Typography>
+        <Grid container spacing={3}>
+          {rankingByCityList.map((raking) => (
+            <Grid key={raking.cityId} item xs={12} md={6} lg={3}>
+              <Widget title={raking.cityName}>
+                <StudentRakingList studentList={highestStudentList} />
+              </Widget>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </Box>
   );
 }
